@@ -3878,6 +3878,7 @@
 	/**
 	 * Temporarily overrides stylesheet during image export in dark mode.
 	 */
+	/*
 	var graphGetSvg = Graph.prototype.getSvg;
 	
 	Graph.prototype.getSvg = function()
@@ -3901,6 +3902,7 @@
 		
 		return result;
 	};
+	 */
 
 	/**
 	 * Safari has problems with math typesetting inside foreignObjects.
