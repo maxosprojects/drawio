@@ -5347,6 +5347,7 @@
 		cropOption, defaultInclude, format)
 	{
 		defaultInclude = (defaultInclude != null) ? defaultInclude : true;
+		defaultInclude = this.lastInclude === undefined ? defaultInclude : this.lastInclude;
 		
 		var div = document.createElement('div');
 		div.style.whiteSpace = 'nowrap';
@@ -5378,7 +5379,8 @@
 		div.appendChild(borderInput);
 		mxUtils.br(div);
 		
-		var defaultTransparent = false; /*graph.background == mxConstants.NONE || graph.background == null*/; 
+		// var defaultTransparent = false; /*graph.background == mxConstants.NONE || graph.background == null*/; 
+		var defaultTransparent = this.lastTransparent === undefined ? false : this.lastTransparent;
 		var transparent = this.addCheckbox(div, mxResources.get('transparentBackground'),
 			defaultTransparent, null, null, format != 'jpeg');
 		var selection = this.addCheckbox(div, mxResources.get('selectionOnly'),
@@ -5447,6 +5449,7 @@
 			height += 26;
 		}
 		
+		// var include = document.createElement('input');
 		var include = this.addCheckbox(div, mxResources.get('includeCopyOfMyDiagram'), defaultInclude, null, null, format != 'jpeg');
 		var hasPages = this.pages != null && this.pages.length > 1;
 		var allPages = this.addCheckbox(div, (hasPages) ? mxResources.get('allPages') : '', hasPages, !hasPages, null, format != 'jpeg');
@@ -5510,6 +5513,8 @@
 		{
 			this.lastExportBorder = borderInput.value;
 			this.lastExportZoom = zoomInput.value;
+			this.lastInclude = include.checked;
+			this.lastTransparent = transparent.checked;
 			
 			callback(zoomInput.value, transparent.checked, !selection.checked, shadow.checked,
 				include.checked, cb5.checked, borderInput.value, cb6.checked, !allPages.checked,
